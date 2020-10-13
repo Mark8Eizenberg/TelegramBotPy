@@ -111,9 +111,11 @@ class TGBotHandler:
         return requests.post(self.url_api_addres + method, parameters)
 
         
-    #Other new methods
+#Other new methods
 
 bot = TGBotHandler("1141692325:AAGkNyHWLZX7HHqXVu_fpHAWT4jThvxqwbU")
+
+greatings = ('привет', 'здравствуй', 'ку', 'здарова', 'здаров', 'хай' )
 
 def main():
     new_offset = None
@@ -126,17 +128,19 @@ def main():
             last_update_id = last_update['update_id']
             last_chat_text = last_update['message']['text']
             last_chat_id = last_update['message']['chat']['id']
-            #last_chat_name = last_update['message']['chat']['first_name']
+            last_chat_name = last_update['message']['chat']['first_name']
             #last_chat_message_id = last_update['message']['message_id']
             if(last_chat_text == '/sticker_test' or last_chat_text == '/sticker_test@my_157_test_bot'):
                 bot.send_sticker_exist(last_chat_id, sticker)
             elif(last_chat_text.lower() == 'test'):
-                #bot.forward_message('', last_chat_id, last_chat_message_id,'true')
+                #bot.forward_message(last_chat_id, last_chat_message_id,'true')
                 #bot.send_full_message(last_chat_id, 'Hi man!', None, None, 'true', last_update['message']['message_id'])
                 #bot.send_text_message(last_chat_id, 'Сам сука, {}'.format(last_chat_name), last_update['message']['message_id'])
-                bot.send_text_HTML_message(last_chat_id,'<b>bold</b> <strong>bold</strong> <i>italic</i> <em>italic</em> <code>inline fixed-width code</code> <pre>pre-formatted fixed-width code block</pre> <a href="URL">inline URL</a> ')
-                #bot.send_sticker_exist(last_chat_id, sticker)
+                #bot.send_text_HTML_message(last_chat_id,'<b>bold</b> <strong>bold</strong> <i>italic</i> <em>italic</em> <code>inline fixed-width code</code> <pre>pre-formatted fixed-width code block</pre> <a href="URL">inline URL</a> ')
+                bot.send_sticker_exist(last_chat_id, sticker)
                 #bot.send_photo(last_chat_id, 'AgACAgIAAxkBAAIBCV-Ey_995dZELO37fGFnfHcTtRwqAALjrjEbcg0pSD9tm0F57UKppnFoly4AAwEAAwIAA3kAAzy9AQABGwQ')
+            elif(last_chat_text.lower() in greatings):
+                bot.send_text_message(last_chat_id, 'Здравствуй, {}'.format(last_chat_name))
             else:
                 bot.send_text_message(last_chat_id, '5 минут, полёт нормальный')
         new_offset = last_update_id + 1
