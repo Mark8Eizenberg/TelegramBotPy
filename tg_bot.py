@@ -116,7 +116,7 @@ class TGBotHandler:
 bot = TGBotHandler("1141692325:AAGkNyHWLZX7HHqXVu_fpHAWT4jThvxqwbU")
 
 greatings = ('привет', 'здравствуй', 'ку', 'здарова', 'здаров', 'хай' )
-
+toSergey = ('/скажи серому', '/серый')
 def main():
     new_offset = None
     last_update_id = 0
@@ -128,7 +128,7 @@ def main():
             last_update_id = last_update['update_id']
             last_chat_text = last_update['message']['text']
             last_chat_id = last_update['message']['chat']['id']
-            last_chat_name = last_update['message']['chat']['first_name']
+            #last_chat_name = last_update['message']['chat']['first_name']
             #last_chat_message_id = last_update['message']['message_id']
             if(last_chat_text == '/sticker_test' or last_chat_text == '/sticker_test@my_157_test_bot'):
                 bot.send_sticker_exist(last_chat_id, sticker)
@@ -141,6 +141,8 @@ def main():
                 #bot.send_photo(last_chat_id, 'AgACAgIAAxkBAAIBCV-Ey_995dZELO37fGFnfHcTtRwqAALjrjEbcg0pSD9tm0F57UKppnFoly4AAwEAAwIAA3kAAzy9AQABGwQ')
             elif(last_chat_text.lower() in greatings):
                 bot.send_text_message(last_chat_id, 'Здравствуй, {}'.format(last_chat_name))
+            elif(last_chat_text.lower() in toSergey):
+                bot.send_text_message(last_chat_id, 'Серый, ты дурак')
             else:
                 bot.send_text_message(last_chat_id, '5 минут, полёт нормальный')
         new_offset = last_update_id + 1

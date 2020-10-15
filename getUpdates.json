@@ -57,6 +57,25 @@
             "file_size":41370
             }
         }
-    }
+    },
+    {"update_id":429536665,
+     "message":{
+        "message_id":924,
+        "from":{
+            "id":437015518,
+            "is_bot":false,
+            "first_name":"Max",
+            "last_name":"Skorik",
+            "username":"Mark_Heizenberg",
+            "language_code":"en"
+            },
+        "chat":{
+            "id":-1001381869258,
+            "title":"\u041d\u043e\u0432\u043e\u0435 \u0414\u0435\u0441\u044f\u0442\u0438\u043b\u0435\u0442\u0438\u0435",
+            "type":"supergroup"
+            },
+        "date":1602760006,
+        "text":"/testim",
+        "entities":[{"offset":0,"length":7,"type":"bot_command"}]}}
 ]}
 
