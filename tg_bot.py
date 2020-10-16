@@ -149,7 +149,6 @@ class TGBotHandler:
         request = requests.post(self.url_api_addres + method, parameters).json()
         return 'https://api.telegram.org/file/bot{}/'.format(self.token) + request['result']['file_path']
         
-<<<<<<< HEAD
     #save file
     def save_file_by_link(self, download_link:str):
         link = requests.get(download_link)
@@ -162,14 +161,9 @@ class TGBotHandler:
         end_file = 'temp.ogg'
         subprocess.run(['ffmpeg', '-i', file_path, end_file])
     #Other new methods
-=======
-#Other new methods
->>>>>>> refs/remotes/origin/main
 
 bot = TGBotHandler("1141692325:AAGkNyHWLZX7HHqXVu_fpHAWT4jThvxqwbU")
 
-greatings = ('привет', 'здравствуй', 'ку', 'здарова', 'здаров', 'хай' )
-toSergey = ('/скажи серому', '/серый')
 def main():
     new_offset = None
     last_update_id = 0
@@ -195,7 +189,6 @@ def main():
             #last_chat_message_id = last_update['message']['message_id']
             if(last_chat_text == '/sticker_test' or last_chat_text == '/sticker_test@my_157_test_bot'):
                 bot.send_sticker_exist(last_chat_id, sticker)
-<<<<<<< HEAD
             elif(last_chat_text.lower() == 'test' or last_chat_text.lower() == '/test'):
                 #bot.forward_message('', last_chat_id, last_chat_message_id,'true')
                 bot.send_full_message(last_chat_id, 'Hi man!', None, None, 'true', last_update['message']['message_id'])
@@ -207,19 +200,6 @@ def main():
                     bot.send_text_message(last_chat_id, 'it is private')
                 else:
                     bot.send_text_message(last_chat_id, 'is group')
-=======
-            elif(last_chat_text.lower() == 'test'):
-                #bot.forward_message(last_chat_id, last_chat_message_id,'true')
-                #bot.send_full_message(last_chat_id, 'Hi man!', None, None, 'true', last_update['message']['message_id'])
-                #bot.send_text_message(last_chat_id, 'Сам сука, {}'.format(last_chat_name), last_update['message']['message_id'])
-                #bot.send_text_HTML_message(last_chat_id,'<b>bold</b> <strong>bold</strong> <i>italic</i> <em>italic</em> <code>inline fixed-width code</code> <pre>pre-formatted fixed-width code block</pre> <a href="URL">inline URL</a> ')
-                bot.send_sticker_exist(last_chat_id, sticker)
-                #bot.send_photo(last_chat_id, 'AgACAgIAAxkBAAIBCV-Ey_995dZELO37fGFnfHcTtRwqAALjrjEbcg0pSD9tm0F57UKppnFoly4AAwEAAwIAA3kAAzy9AQABGwQ')
-            elif(last_chat_text.lower() in greatings):
-                bot.send_text_message(last_chat_id, 'Здравствуй, {}'.format(last_chat_name))
-            elif(last_chat_text.lower() in toSergey):
-                bot.send_text_message(last_chat_id, 'Серый, ты дурак')
->>>>>>> refs/remotes/origin/main
             else:
                 bot.send_text_message(last_chat_id, '5 минут, полёт нормальный')
         new_offset = last_update_id + 1
