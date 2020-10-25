@@ -20,7 +20,9 @@ def voice_to_text(voice_file_path):
     return result
 
 tgb = bot.TGBotHandler("1141692325:AAGkNyHWLZX7HHqXVu_fpHAWT4jThvxqwbU")
-
+sergey = {'скажи серому', 'серому','/скажи серому','/серому'}
+sticker = 'CAACAgIAAxkBAAODX4RsgdDcrnUdFJgj6r4hZqpCaR0AAusBAAIrLT8Z19gEn7d2ETEbBA'
+get_weather = {'/weather', '/weather@my_157_test_bot', '/погода', 'погода'}
 def main():
     new_offset = None
     last_update_id = 0
@@ -39,13 +41,17 @@ def main():
                 os.remove(new_file)
                 tgb.send_text_message(last_chat_id, "Ваш текст:\n{}".format(text_from_voice))
             elif(tgb.get_type_of_message(last_update) == bot.Type_of_message.TEXT):
-                if(last_update['message']['text'].lower() == "/погода" or last_update['message']['text'].lower() == "погода"):
+                if(last_update['message']['text'].lower() in get_weather):
                     weather = requests.get('https://api.openweathermap.org/data/2.5/onecall?lat=47.906&lon=33.395&units=metric&exclude=hourly,daily&appid=c32fd26bff44520278bc12f8b3b65878').json()
                     temp = weather['current']['temp']
                     wind = weather['current']['wind_speed']
                     weath = weather['current']['weather'][0]['description']
                     forecast = "Температура: {}\nСкорость ветра: {}\nПогода: {} ".format(temp,wind,weath)
                     tgb.send_text_message(last_chat_id, forecast)
+                elif(last_update['message']['text'].lower() in sergey):
+                    tgb.send_text_HTML_message(last_chat_id, '<strong>Серый, ты дурак</strong>')
+                elif(last_update['message']['text'].lower() == '/stiker_test' or last_update['message']['text'].lower() == '/sticker_test@my_157_test_bot'):
+                    tgb.send_sticker_exist(last_chat_id, sticker)
                 else:
                     tgb.send_text_message(last_chat_id, "Тебе шо, пообщаться не с кем?")
             else:
