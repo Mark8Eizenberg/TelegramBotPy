@@ -2,8 +2,12 @@ import subprocess
 import speech_recognition as sr
 import tg_bot as bot
 import os
+import platform
 import requests
 
+ffmpeg_path = 'ffmpeg'
+if(platform.system() == 'Windows'):
+    ffmpeg_path = 'C:/ffmpeg/bin/ffmpeg.exe'
  #convert oga to ogg
 def convert_oga_to_wav(file_path):
     end_file = 'temp.wav'
@@ -48,10 +52,6 @@ def main():
                     weath = weather['current']['weather'][0]['description']
                     forecast = "Температура: {}\nСкорость ветра: {}\nПогода: {} ".format(temp,wind,weath)
                     tgb.send_text_message(last_chat_id, forecast)
-                elif(last_update['message']['text'].lower() in sergey):
-                    tgb.send_text_HTML_message(last_chat_id, '<strong>Серый, ты дурак</strong>')
-                elif(last_update['message']['text'].lower() == '/stiker_test' or last_update['message']['text'].lower() == '/sticker_test@my_157_test_bot'):
-                    tgb.send_sticker_exist(last_chat_id, sticker)
                 else:
                     tgb.send_text_message(last_chat_id, "Тебе шо, пообщаться не с кем?")
             else:

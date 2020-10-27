@@ -120,6 +120,61 @@ class TGBotHandler:
         method = 'sendPhoto'
         return requests.post(self.url_api_addres + method, parameters)
     
+    #send video to chat
+    def send_video(self,chat_id, video, duration=None, width=None,
+                    height=None, thumb=None, caption=None, parse_mode=None,
+                    supports_streaming=None, disable_notification=None,
+                    reply_to_message_id=None, reply_markup=None):
+        parameters = {'chat_id': chat_id, 'video': video}
+        if(duration != None):
+            parameters['duration'] = duration
+        if(width != None):
+            parameters['width'] = width
+        if(height != None):
+            parameters['height'] = height
+        if(thumb != None):
+            parameters['thumb'] = thumb
+        if(caption != None):
+            parameters['caption'] = caption
+        if(parse_mode != None):
+            parameters['parse_mode'] = parse_mode
+        if(supports_streaming != None):
+            parameters['supports_streaming'] = supports_streaming
+        if(disable_notification != None):
+            parameters['disable_notification'] = disable_notification
+        if(reply_to_message_id != None):
+            parameters['reply_to_message_id'] = reply_to_message_id
+        if(reply_markup != None):
+            parameters['reply_markup'] = reply_markup
+        method = 'sendVideo'
+        return requests.post(self.url_api_addres + method, parameters)
+
+    #send audio to chat
+    def send_audio(self, chat_id, audio, caption=None, parse_mode=None,
+                    duration=None, performer=None, title=None, thumb=None,
+                    disable_notification=None, reply_to_message_id=None,
+                    reply_markup=None):
+        parameters = {'chat_id': chat_id, 'audio': audio}
+        if(caption != None):
+            parameters['caption'] = caption
+        if(parse_mode != None):
+            parameters['parse_mode'] = parse_mode
+        if(duration != None):
+            parameters['duration'] = duration
+        if(performer != None):
+            parameters['performer'] = performer
+        if(title != None):
+            parameters['title'] = title
+        if(thumb != None):
+            parameters['thumb'] = thumb
+        if(disable_notification != None):
+            parameters['disable_notification'] = disable_notification
+        if(reply_to_message_id != None):
+            parameters['reply_to_message_id'] = reply_to_message_id
+        if(reply_markup != None):
+            parameters['reply_markup'] = reply_markup
+        method = 'sendAudio'
+        return requests.post(self.url_api_addres + method, parameters)
     #return true if is private chat, false if group chat
     def is_private_chat(self, last_update_data):
         return (last_update_data['message']['chat']['type'] == 'private')
