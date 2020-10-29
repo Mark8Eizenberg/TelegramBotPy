@@ -175,6 +175,27 @@ class TGBotHandler:
             parameters['reply_markup'] = reply_markup
         method = 'sendAudio'
         return requests.post(self.url_api_addres + method, parameters)
+    
+    #send document to chat
+    def send_document(self, chat_id, document, thumb=None, caption=None,
+                        parse_mode=None, disable_notification=None, 
+                        reply_to_message_id=None, reply_markup=None):
+        parameters = {'chat_id': chat_id, 'document': document}
+        if(thumb != None):
+            parameters['thumb'] = thumb
+        if(caption != None):
+            parameters['caption'] = caption
+        if(parse_mode != None):
+            parameters['parse_mode'] = parse_mode
+        if(disable_notification != None):
+            parameters['disable_notification'] = disable_notification
+        if(reply_to_message_id != None):
+            parameters['reply_to_message_id'] = reply_to_message_id
+        if(reply_markup != None):
+            parameters['reply_markup'] = reply_markup
+        method = 'sendDocument'
+        return requests.post(self.url_api_addres + method, parameters)
+    
     #return true if is private chat, false if group chat
     def is_private_chat(self, last_update_data):
         return (last_update_data['message']['chat']['type'] == 'private')
