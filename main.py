@@ -58,6 +58,8 @@ def main():
                         tgb.send_text_message(last_chat_id, get_weather_str())
                     elif(text_from_voice.lower() == 'что ты можешь'):
                         tgb.send_text_message(last_chat_id, 'Могу перевести голосовое сообщение в текст\nА ещё, попробуй сказать \"Погода\"')
+                    elif(text_from_voice.lower() == 'спасибо'):
+                        tgb.send_text_message(last_chat_id, 'Ооу, ты сказал мне спасибо, это так мило :)')
                     else:
                         tgb.send_text_message(last_chat_id, "Ваш текст:\n{}".format(text_from_voice))
                 except Exception:
@@ -68,6 +70,8 @@ def main():
             elif(tgb.get_type_of_message(last_update) == bot.Type_of_message.TEXT):
                 if(last_update['message']['text'].lower() in get_weather):
                     tgb.send_text_message(last_chat_id, get_weather_str())
+                elif(last_update['message']['text'].lower() == '/start'):
+                    tgb.send_text_message(last_chat_id, 'Привет, я бот Макса! Называй меня Генри. \nЯ могу сделать с голосового текс, ну и предсказать погоду. \nЕсли что-то не так то извини, я ещё маленький :)')
                 else:
                     tgb.send_text_message(last_chat_id, "Тебе шо, пообщаться не с кем?")
             else:
