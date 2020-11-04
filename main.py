@@ -34,6 +34,7 @@ def get_weather_str():
 rec_file:str = 'rec.wav'
 tgb = bot.TGBotHandler("1141692325:AAGkNyHWLZX7HHqXVu_fpHAWT4jThvxqwbU")
 sticker = 'CAACAgIAAxkBAAODX4RsgdDcrnUdFJgj6r4hZqpCaR0AAusBAAIrLT8Z19gEn7d2ETEbBA'
+get_stiker = {'/sticker_test@my_157_test_bot', '/sticker_test'}
 get_weather = {'/weather', '/weather@my_157_test_bot', '/погода', 'погода'}
 def main():
     new_offset = None
@@ -68,10 +69,13 @@ def main():
                     os.remove(new_file)
                     os.remove(rec_file)
             elif(tgb.get_type_of_message(last_update) == bot.Type_of_message.TEXT):
-                if(last_update['message']['text'].lower() in get_weather):
+                text = last_update['message']['text'].lower()
+                if(text in get_weather):
                     tgb.send_text_message(last_chat_id, get_weather_str())
-                elif(last_update['message']['text'].lower() == '/start'):
+                elif(text == '/start'):
                     tgb.send_text_message(last_chat_id, 'Привет, я бот Макса! Называй меня Генри. \nЯ могу сделать с голосового текс, ну и предсказать погоду. \nЕсли что-то не так то извини, я ещё маленький :)')
+                elif(text in get_stiker):
+                    tgb.send_sticker_exist(last_chat_id, sticker)
                 else:
                     tgb.send_text_message(last_chat_id, "Тебе шо, пообщаться не с кем?")
             else:
